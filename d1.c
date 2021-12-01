@@ -23,6 +23,7 @@ int main()
     }
 
     fclose(fp);
+    part1(arr,len);
     part2(arr,len);
     free(arr);
     
@@ -36,7 +37,7 @@ int part1(int *arr,int len){
             cnt++;
         }
     }
-    printf("%d", cnt);
+    printf("%d\n", cnt);
 }
 
 int part2(int *arr,int len){
@@ -52,5 +53,5 @@ int part2(int *arr,int len){
         }
         prev = three_sum;
     }
-    printf("%d", cnt);
+    printf("%d\n", cnt);
 }
