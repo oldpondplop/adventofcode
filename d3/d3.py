@@ -6,7 +6,7 @@ def part1(inp):
         most_common = '0' if  s.count('0') > s.count('1') else '1'
         gamma_rate += most_common
         epsilon_rate += '1' if most_common=='0' else '0' 
-    return(int(gamma_rate,2) * int(epsilon_rate,2))
+    return(int(gamma_rate, 2) * int(epsilon_rate, 2))
 
 
 def part2(l,pos,arg):
@@ -31,4 +31,4 @@ print(part1(inp))
 O2 = part2(inp,0,"most_common")
 CO2 = part2(inp,0,"least_common")
 
-print(int(*CO2,2) * int(*O2,2))
+print(int(*CO2, 2) * int(*O2, 2))
