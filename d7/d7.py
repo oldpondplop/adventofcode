@@ -5,7 +5,7 @@ def part2(p,l):
     return int(sum(abs(i-p)*(abs(i-p)+1)/2 for i in l))
 
 def result(fun):
-    lowest = float('inf')
+    lowest = int('inf')
     for p in range(min(ns), max(ns)): 
         fuel = fun(p,ns)
         if fuel < lowest: 
