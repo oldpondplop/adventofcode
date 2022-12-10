@@ -14,7 +14,6 @@ def p1():
             crates = stacks[_from][:q][::-1]
             stacks[_from] = stacks[_from][q:]
             stacks[to] = crates + stacks[to]
-
     return ''.join(*zip(*stacks))
 
 def p2():
@@ -26,7 +25,6 @@ def p2():
             crates = stacks[_from][:q]
             stacks[_from] = stacks[_from][q:]
             stacks[to] = crates + stacks[to]
-
     return ''.join(*zip(*stacks))
 
 print(p1())
