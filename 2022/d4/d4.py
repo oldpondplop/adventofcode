@@ -9,7 +9,7 @@ for pairs in inp:
     if set1.issubset(set2) or set2.issubset(set1):
         p1+=1
     if set1 & set2:
-        p1+=1
+        p2+=1
 
 print(p1)
 print(p2)
