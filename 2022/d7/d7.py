@@ -1,25 +1,30 @@
-from pathlib import Path
+from collections import deque
 from collections import defaultdict
-from itertools import groupby
+
 
 with open('inp.txt','r') as f:
     inp = f.read().strip().split('\n')
 
-p = Path('/')
 d = defaultdict(int)
-for k, g in groupby(inp, lambda x: x.startswith("$ cd")):    
-    g = list(g)
-    if k:
-        for i in g:
-            p = p / i.split()[-1]
-    else:
-        d[p.resolve()] = sum(int(i.split()[0]) for i in g if i[0].isdigit())
-
-for p in d.keys():
-    if p.parent != p:
-        # print(f'{p.parent} {d[p.parent]} {p} {d[p]}')
-        d[p.parent] += d[p]
+stack = []
+for i, e in enumerate(inp):
+    if e.startswith('$ cd') and '..' not in e:
+            cwd = e.split()[-1]
+            p = stack.pop() if stack else ()
+            pwd = (*p, cwd) 
+            stack.append(pwd)
+    elif '..' in e:
+        stack = [stack.pop()[:-1]]
+    elif e[0].isdigit():
+        dir_total = int(e.split()[0])
+        d[pwd] += dir_total
+        for i in range(1, len(pwd)):
+            d[pwd[:-i]] += dir_total
 
 p1 = sum(v for v in d.values() if v <= 100000)
 
+size = 30000000 - (70000000 - d[('/',)])
+p2 = [i for i in sorted(d.values()) if i >= size][0]
+
 print(p1)
+print(p2)
