@@ -7,7 +7,7 @@ with open('inp.txt','r') as f:
 
 d = defaultdict(int)
 stack = []
-for i, e in enumerate(inp):
+for e in inp:
     if e.startswith('$ cd') and '..' not in e:
             cwd = e.split()[-1]
             p = stack.pop() if stack else ()
