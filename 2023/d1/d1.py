@@ -14,17 +14,17 @@ w2i = {
 }
 
 def p1():
-	total = 0
-	for line in inp:
-		for c in line:
-			if c.isdigit():
-				total += int(c) * 10
-				break
-		for c in line[::-1]:
-			if c.isdigit():
-				total += int(c)
-				break 
-	return total
+  total = 0
+  for line in inp:
+    for c in line:
+      if c.isdigit():
+        total += int(c) * 10
+        break
+    for c in line[::-1]:
+      if c.isdigit():
+        total += int(c)
+        break 
+  return total
 
 def p2():
   def _get_digit(s: str):
