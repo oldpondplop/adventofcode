@@ -50,4 +50,5 @@ def p2():
         break
   return total
 
+print(p1())
 print(p2())
