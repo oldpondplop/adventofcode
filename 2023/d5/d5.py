@@ -51,21 +51,17 @@ def p2():
     is_right_overlap = (s2 < e1 <= e2)
     is_inner_overlap = (s1 < s2 and e1 > e2)
 
-    overlapping, non_overlapping = [], []
-    if is_left_overlap and is_right_overlap:  # Complete
-      overlapping.append((s1 + d, e1 + d))
-    elif is_inner_overlap:  # Inner
-      overlapping.append((s2 + d, e2 + d))
-      non_overlapping.append((s1, s2))
-      non_overlapping.append((e2, e1))
-    elif is_right_overlap:  # Right
-      overlapping.append((s2 + d, e1 + d))
-      non_overlapping.append((s1, s2))
-    elif is_left_overlap:  # Left
-      overlapping.append((s1 + d, e2 + d))
-      non_overlapping.append((e2, e1))
-    return overlapping, non_overlapping
-  
+    if is_left_overlap and is_right_overlap: # Complete
+      return [(s1 + d, e1 + d)], [] 
+    elif is_inner_overlap: # Inner
+      return [(s2 + d, e2 + d)], [(s1, s2), (e2, e1)]
+    elif is_right_overlap: # Right
+      return [(s2 + d, e1 + d)], [(s1, s2)]
+    elif is_left_overlap: # Left
+      return [(s1 + d, e2 + d)], [(e2, e1)]
+    else:
+      return [], []
+
   seeds = list(map(int, inp[0].split(' ', 1)[1].split()))
   seed_ranges = deque([(start, start + length) for start, length in zip(seeds[::2], seeds[1::2])])
   mappings = []
@@ -81,10 +77,10 @@ def p2():
       seed_range = seed_ranges.popleft()
       
       for s, e, d in mapping:
-        overlapping, remaining = _calculate_overlap(seed_range, (s, e, d))
-        if overlapping: # intersection
+        overlapping, remaining = _calculate_overlap(seed_range, (s, e, d)) 
+        if overlapping:
           new_seed_ranges.extend(overlapping)
-          if remaining: # remaining parts to check against the next mapping
+          if remaining: # remaining parts to check
             seed_ranges.extend(remaining)
           break
       else: # no overlapping
