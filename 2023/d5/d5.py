@@ -59,8 +59,7 @@ def p2():
       return [(s2 + d, e1 + d)], [(s1, s2)]
     elif is_left_overlap: # Left
       return [(s1 + d, e2 + d)], [(e2, e1)]
-    else:
-      return [], []
+    return [], []
 
   seeds = list(map(int, inp[0].split(' ', 1)[1].split()))
   seed_ranges = deque([(start, start + length) for start, length in zip(seeds[::2], seeds[1::2])])
